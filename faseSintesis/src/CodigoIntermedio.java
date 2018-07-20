@@ -26,6 +26,14 @@ public class CodigoIntermedio {
         String aux="";
         
         while(i<entrada.size()){
+            if(entrada.get(i).valor.equals("task")){
+                while(!(entrada.get(i).valor.equals("{"))){
+                    aux+=entrada.get(i).valor+" ";
+                    i++;
+                }
+                salida.add(aux);
+                aux="";
+            }
             if(entrada.get(i).valor.equals("servo")){
                 aux+="sv"+cserv+"=";
                 cserv++;
@@ -110,20 +118,26 @@ public class CodigoIntermedio {
                 aux+=";";
                 salida.add(aux);
                 aux="";
-            }
-            if(entrada.get(i).valor.equals("task")){
-                reinicia();
-            }
-            
-            
+                }                     
             i++;
-        }     
-        
+        }
     }
     
     public static void main(String[] args) {
         ArrayList<Token> prueba=new ArrayList<>();
         prueba.add(new Token("task",1));
+        prueba.add(new Token("params",1));
+        prueba.add(new Token("none",1));
+        prueba.add(new Token("{",1));
+        prueba.add(new Token("servo",2));
+        prueba.add(new Token("(",2));
+        prueba.add(new Token("5",2));
+        prueba.add(new Token(")",2));
+        prueba.add(new Token("$",2));
+        prueba.add(new Token("}",3));
+        prueba.add(new Token("task",1));
+        prueba.add(new Token("params",1));
+        prueba.add(new Token("none",1));
         prueba.add(new Token("{",1));
         prueba.add(new Token("servo",2));
         prueba.add(new Token("(",2));
