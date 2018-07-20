@@ -26,92 +26,92 @@ public class CodigoIntermedio {
         String aux="";
         
         while(i<entrada.size()){
-            if(entrada.get(i).equals("servo")){
+            if(entrada.get(i).valor.equals("servo")){
                 aux+="sv"+cserv+"=";
                 cserv++;
-                while(!(entrada.get(i).equals("(")))
+                while(!(entrada.get(i).valor.equals("(")))
                     i++;
                 i++;
-                while(!(entrada.get(i).equals(")"))){
-                    aux+=entrada.get(i);
+                while(!(entrada.get(i).valor.equals(")"))){
+                    aux+=entrada.get(i).valor;
                     i++;
                 }
                 aux+=";";
                 salida.add(aux);
                 aux="";
             }
-            if(entrada.get(i).equals("solenoid")){
+            if(entrada.get(i).valor.equals("solenoid")){
                 aux+="so"+csol+"=";
                 csol++;
-                while(!(entrada.get(i).equals("(")))
+                while(!(entrada.get(i).valor.equals("(")))
                     i++;
                 i++;
-                while(!(entrada.get(i).equals(")"))){
-                    aux+=entrada.get(i);
+                while(!(entrada.get(i).valor.equals(")"))){
+                    aux+=entrada.get(i).valor;
                     i++;
                 }
                 aux+=";";
                 salida.add(aux);
                 aux="";
             }
-            if(entrada.get(i).equals("display")){
+            if(entrada.get(i).valor.equals("display")){
                 aux+="di"+cdis+"=";
                 cdis++;
-                while(!(entrada.get(i).equals("(")))
+                while(!(entrada.get(i).valor.equals("(")))
                     i++;
                 i++;
-                while(!(entrada.get(i).equals(")"))){
-                    aux+=entrada.get(i);
+                while(!(entrada.get(i).valor.equals(")"))){
+                    aux+=entrada.get(i).valor;
                     i++;
                 }
                 aux+=";";
                 salida.add(aux);
                 aux="";
             }
-            if(entrada.get(i).equals("sensor")){
+            if(entrada.get(i).valor.equals("sensor")){
                 aux+="se"+csen+"=";
                 csen++;
-                while(!(entrada.get(i).equals("(")))
+                while(!(entrada.get(i).valor.equals("(")))
                     i++;
                 i++;
-                while(!(entrada.get(i).equals(")"))){
-                    aux+=entrada.get(i);
+                while(!(entrada.get(i).valor.equals(")"))){
+                    aux+=entrada.get(i).valor;
                     i++;
                 }
                 aux+=";";
                 salida.add(aux);
                 aux="";
             }
-            if(entrada.get(i).equals("ligth")){
+            if(entrada.get(i).valor.equals("ligth")){
                 aux+="li"+clig+"=";
                 clig++;
-                while(!(entrada.get(i).equals("(")))
+                while(!(entrada.get(i).valor.equals("(")))
                     i++;
                 i++;
-                while(!(entrada.get(i).equals(")"))){
-                    aux+=entrada.get(i);
+                while(!(entrada.get(i).valor.equals(")"))){
+                    aux+=entrada.get(i).valor;
                     i++;
                 }
                 aux+=";";
                 salida.add(aux);
                 aux="";
             }
-            if(entrada.get(i).equals("int")||entrada.get(i).equals("text")
-               ||entrada.get(i).equals("boolean")||entrada.get(i).equals("float")){
+            if(entrada.get(i).valor.equals("int")||entrada.get(i).valor.equals("text")
+               ||entrada.get(i).valor.equals("boolean")||entrada.get(i).valor.equals("float")){
                 aux+="t"+cid+"=";
                 cid++;
-                while(!(entrada.get(i).equals("=")))
+                while(!(entrada.get(i).valor.equals("=")))
                     i++;
                 i++;
-                while(!(entrada.get(i).equals("$"))){
-                    aux+=entrada.get(i);
+                while(!(entrada.get(i).valor.equals("$"))){
+                    aux+=entrada.get(i).valor;
                     i++;
                 }
                 aux+=";";
                 salida.add(aux);
                 aux="";
             }
-            if(entrada.get(i).equals("task")){
+            if(entrada.get(i).valor.equals("task")){
                 reinicia();
             }
             
@@ -122,49 +122,15 @@ public class CodigoIntermedio {
     }
     
     public static void main(String[] args) {
-        ArrayList<String> prueba=new ArrayList<>();
-        prueba.add("task");
-        prueba.add("{");
-        prueba.add("int");
-        prueba.add("hola");
-        prueba.add("=");
-        prueba.add("23");
-        prueba.add("$");
-        prueba.add("text");
-        prueba.add("hola");
-        prueba.add("=");
-        prueba.add("23");
-        prueba.add("$");
-        prueba.add("}");
-        prueba.add("task");
-        prueba.add("{");
-        prueba.add("servo");
-        prueba.add("(");
-        prueba.add("8");
-        prueba.add(")");
-        prueba.add("$");
-        prueba.add("}");
-        prueba.add("task");
-        prueba.add("{");
-        prueba.add("servo");
-        prueba.add("(");
-        prueba.add("8");
-        prueba.add(")");
-        prueba.add("$");
-        prueba.add("}");
-        prueba.add("task");
-        prueba.add("{");
-        prueba.add("solenoid");
-        prueba.add("(");
-        prueba.add("14");
-        prueba.add(")");
-        prueba.add("$");
-        prueba.add("solenoid");
-        prueba.add("(");
-        prueba.add("80");
-        prueba.add(")");
-        prueba.add("$");
-        prueba.add("}");
+        ArrayList<Token> prueba=new ArrayList<>();
+        prueba.add(new Token("task",1));
+        prueba.add(new Token("{",1));
+        prueba.add(new Token("servo",2));
+        prueba.add(new Token("(",2));
+        prueba.add(new Token("5",2));
+        prueba.add(new Token(")",2));
+        prueba.add(new Token("$",2));
+        prueba.add(new Token("}",3));
         CodigoIntermedio ci=new CodigoIntermedio(prueba);
         ci.genCod();
         ci.imprime();
